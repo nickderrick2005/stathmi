@@ -1,11 +1,5 @@
 import type { Kysely } from 'kysely';
-import type {
-  HotWord,
-  HotWordsMetaResponse,
-  HotWordsResponse,
-  WordMeta,
-  ChannelWordMeta,
-} from '@opz-hub/shared';
+import type { HotWord, HotWordsMetaResponse, HotWordsResponse, WordMeta, ChannelWordMeta } from '@opz-hub/shared';
 import nodejieba from 'nodejieba';
 import { getRedis } from '../lib/redis.js';
 import type { DB } from '../types/database.js';
@@ -23,7 +17,7 @@ export class HotWordsService {
   private readonly aliasPath: string | null;
   private readonly stopwordsPath: string | null;
 
-  private readonly STOP_WORDS = new Set([
+  private static readonly DEFAULT_STOP_WORDS = [
     '的',
     '了',
     '是',
@@ -69,10 +63,11 @@ export class HotWordsService {
     'was',
     'were',
     'be',
-  ]);
+  ];
 
-  private readonly blacklist = new Set<string>();
-  private readonly mapping = new Map<string, { canonical: string; type?: 'keyword' | 'tag'; weight?: number }>();
+  private STOP_WORDS = new Set(HotWordsService.DEFAULT_STOP_WORDS);
+  private blacklist = new Set<string>();
+  private mapping = new Map<string, { canonical: string; type?: 'keyword' | 'tag'; weight?: number }>();
   private dictionariesLoaded = false;
 
   constructor(private readonly db: Kysely<DB>) {
@@ -314,10 +309,7 @@ export class HotWordsService {
   }
 
   private isValidWord(word: string, tagsSet: Set<string>): boolean {
-    return (
-      this.isAllowedWord(word) &&
-      !tagsSet.has(word)
-    );
+    return this.isAllowedWord(word) && !tagsSet.has(word);
   }
 
   private normalizeQuery(raw: string): string | null {
@@ -381,7 +373,8 @@ export class HotWordsService {
       for (let j = 0; j < data.length; j += 2) {
         const word = data[j];
         const count = parseFloat(data[j + 1]);
-        if (word.length >= 2 && word.length <= 20) {
+        // 聚合时过滤停用词和黑名单
+        if (word.length >= 2 && word.length <= 20 && this.isAllowedWord(word)) {
           aggregated.set(word, (aggregated.get(word) || 0) + count * weights[i]);
         }
       }
@@ -529,7 +522,11 @@ export class HotWordsService {
     }
   }
 
-  private normalizeWordMeta(word: string, type: 'keyword' | 'tag', score: number): {
+  private normalizeWordMeta(
+    word: string,
+    type: 'keyword' | 'tag',
+    score: number
+  ): {
     word: string;
     type: 'keyword' | 'tag';
     score: number;
@@ -564,7 +561,10 @@ export class HotWordsService {
       for (let j = 0; j < data.length; j += 2) {
         const word = data[j];
         const count = parseFloat(data[j + 1]);
-        aggregated.set(word, (aggregated.get(word) || 0) + count * weights[i]);
+        // 聚合时过滤停用词和黑名单
+        if (this.isAllowedWord(word)) {
+          aggregated.set(word, (aggregated.get(word) || 0) + count * weights[i]);
+        }
       }
     }
 
@@ -632,5 +632,55 @@ export class HotWordsService {
         score: Number(row.usage_count ?? 0),
         rank: idx + 1,
       }));
+  }
+
+  /**
+   * 重新加载所有词典（停用词、黑名单、映射）
+   * 用于在运行时更新词典文件后立即生效
+   */
+  async reloadDictionaries(): Promise<void> {
+    // 重置状态
+    this.dictionariesLoaded = false;
+    this.STOP_WORDS = new Set(HotWordsService.DEFAULT_STOP_WORDS);
+    this.blacklist.clear();
+    this.mapping.clear();
+
+    // 重新加载
+    await this.ensureDictionariesLoaded();
+  }
+
+  // 清空 Redis 中的聚合数据（保留原始统计数据）
+  async clearAggregatedData(): Promise<void> {
+    const redis = this.redis;
+    if (!redis) return;
+
+    const keysToDelete: string[] = [
+      'hot:search:query:aggregated',
+      'hot:search:tokens:aggregated',
+      'hot:content:aggregated',
+    ];
+
+    // 获取所有频道的聚合 key
+    const channels = await redis.smembers('hot:content:channels');
+    for (const channelId of channels) {
+      keysToDelete.push(`hot:content:aggregated:channel:${channelId}`);
+    }
+
+    if (keysToDelete.length > 0) {
+      await redis.del(...keysToDelete);
+    }
+  }
+
+  // 重载词典 -> 清空聚合 -> 重新聚合
+  async reloadAndReaggregate(): Promise<{ stopWordsCount: number; blacklistCount: number }> {
+    await this.reloadDictionaries();
+    await this.clearAggregatedData();
+    await this.aggregateHotSearch();
+    await this.aggregateContentHotWords();
+
+    return {
+      stopWordsCount: this.STOP_WORDS.size,
+      blacklistCount: this.blacklist.size,
+    };
   }
 }

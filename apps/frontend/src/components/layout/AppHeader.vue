@@ -399,7 +399,7 @@ async function handleSearchAuthorPosts(author: AuthorAutocompleteItem) {
 }
 
 .logo-img {
-  height: 3.5rem;
+  height: 3.25rem;
   width: auto;
   filter: var(--opz-icon-filter);
 }

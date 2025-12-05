@@ -24,7 +24,8 @@
     "lint:frontend:fix": "pnpm --filter @opz-hub/frontend lint",
     "format": "pnpm run format:backend && pnpm run format:frontend",
     "format:backend": "prettier --write \"apps/backend/src/**/*.{ts,tsx}\"",
-    "format:frontend": "pnpm --filter @opz-hub/frontend format"
+    "format:frontend": "pnpm --filter @opz-hub/frontend format",
+    "hotwords:reload": "pnpm --filter @opz-hub/backend hotwords:reload"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
