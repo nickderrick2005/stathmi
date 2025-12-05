@@ -132,7 +132,7 @@ async function openLegalDoc(type: 'tos' | 'privacy') {
 }
 
 .brand-logo {
-  height: 4rem;
+  height: 8rem;
   width: auto;
   filter: var(--opz-icon-filter);
 }
@@ -247,7 +247,7 @@ async function openLegalDoc(type: 'tos' | 'privacy') {
 /* 移动端适配 */
 @media (max-width: 480px) {
   .brand-logo {
-    height: 3rem;
+    height: 4.5rem;
   }
 
   .features {

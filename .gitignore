@@ -18,9 +18,8 @@ packages/resources/**
 !packages/resources/**/.gitkeep
 apps/backend/config/**
 !apps/backend/config/.gitkeep
-reset-search-cache.sh
 ecosystem.config.cjs
-deploy.sh
+*.sh
 *.conf
 *.service
 
@@ -37,8 +36,6 @@ migration/
 exports/
 *.pid
 *.pgid
-*-staging.sh
-*-prod.sh
 AGENTS.md
 CLAUDE.md
 DEPLOY.md
