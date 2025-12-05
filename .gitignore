@@ -1,0 +1,47 @@
+# Node
+node_modules/
+*.log
+dist/
+.turbo/
+.eslintcache
+.tsbuildinfo
+apps/**/.tsbuild/
+
+# Env
+.env
+.env.*
+apps/**/.env
+packages/**/.env
+
+# Runtime
+packages/resources/**
+!packages/resources/**/.gitkeep
+apps/backend/config/**
+!apps/backend/config/.gitkeep
+reset-search-cache.sh
+ecosystem.config.cjs
+deploy.sh
+*.conf
+*.service
+
+# Editor
+.DS_Store
+.idea/
+.vscode/
+.cursor/
+.cursorrules
+.claude/
+
+# personal doc
+migration/
+exports/
+*.pid
+*.pgid
+*-staging.sh
+*-prod.sh
+AGENTS.md
+CLAUDE.md
+DEPLOY.md
+
+# Notices
+notices/

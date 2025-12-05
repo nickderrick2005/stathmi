@@ -1,0 +1,29 @@
+/**
+ * 标签分组公共样式
+ * 用于 OnboardingView、BlocksView、FollowsView 等需要分组展示标签的场景
+ */
+
+.tag-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.tag-group + .tag-group {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px dashed var(--opz-border);
+}
+
+.tag-group-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.tag-group-name {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--opz-text-tertiary);
+}

@@ -1,0 +1,47 @@
+/**
+ * 星图ΣΤΑΘΜΗ - Theme Switching
+ * 主题相关的语义化变量，根据 data-theme 属性切换
+ */
+
+:root {
+  /* Semantic colors - Light mode (default) */
+  --opz-bg-base: var(--opz-white);
+  --opz-bg-soft: var(--opz-white-soft);
+  --opz-bg-mute: var(--opz-white-mute);
+  --opz-bg-card: var(--opz-white-soft);
+  --opz-bg-elevated: #ffffff;
+
+  --opz-border: var(--opz-divider-light-2);
+  --opz-border-hover: var(--opz-divider-light-1);
+
+  --opz-text-primary: var(--opz-text-light-1);
+  --opz-text-secondary: var(--opz-text-light-2);
+  --opz-text-tertiary: rgba(60, 60, 67, 0.6);
+  --opz-text-muted: var(--opz-text-light-2);
+
+  /* Utility variables */
+  --opz-icon-filter: none;
+  --opz-danger: #ef4444;
+  --opz-danger-bg: rgba(239, 68, 68, 0.1);
+}
+
+:root[data-theme='dark'] {
+  /* Semantic colors - Dark mode */
+  --opz-bg-base: var(--opz-black);
+  --opz-bg-soft: var(--opz-black-soft);
+  --opz-bg-mute: var(--opz-black-mute);
+  --opz-bg-card: var(--opz-black-soft);
+  --opz-bg-elevated: #3a3a3c;
+
+  --opz-border: var(--opz-divider-dark-2);
+  --opz-border-hover: var(--opz-divider-dark-1);
+
+  --opz-text-primary: var(--opz-text-dark-1);
+  --opz-text-secondary: var(--opz-text-dark-2);
+  --opz-text-tertiary: rgba(235, 235, 245, 0.5);
+  --opz-text-muted: var(--opz-text-dark-2);
+
+  /* Utility variables */
+  --opz-icon-filter: invert(1);
+  --opz-danger-bg: rgba(239, 68, 68, 0.15);
+}

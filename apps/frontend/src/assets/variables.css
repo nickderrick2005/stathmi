@@ -1,0 +1,68 @@
+/**
+ * 星图ΣΤΑΘΜΗ - CSS Variables
+ * 语义化变量定义，使用 --opz- 前缀便于用户覆盖
+ */
+
+:root {
+  /* Layout */
+  --opz-content-width: 960px;
+  --opz-header-height: 56px; /* 统一移动端和PC端高度为 3.5rem */
+  --opz-spacing-xs: 0.25rem;
+  --opz-spacing-sm: 0.5rem;
+  --opz-spacing-md: 1rem;
+  --opz-spacing-lg: 1.5rem;
+  --opz-spacing-xl: 2rem;
+
+  /* Typography */
+  --opz-font-family:
+    Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans',
+    'Helvetica Neue', sans-serif;
+  --opz-font-size-base: 15px;
+  --opz-font-size-sm: 13px;
+  --opz-font-size-lg: 17px;
+  --opz-font-size-xl: 20px;
+  --opz-line-height: 1.6;
+
+  /* Border Radius */
+  --opz-radius-sm: 4px;
+  --opz-radius-md: 8px;
+  --opz-radius-lg: 12px;
+
+  /* Transitions */
+  --opz-transition-fast: 0.15s ease;
+  --opz-transition-base: 0.3s ease;
+  --opz-transition-slow: 0.5s ease;
+
+  /* Z-index layers */
+  --opz-z-dropdown: 1000;
+  --opz-z-modal: 2000;
+  --opz-z-toast: 3000;
+
+  /* Brand colors (用户可覆盖) */
+  --opz-primary: #3b82f6;
+  --opz-accent: #eb459e;
+  --opz-success: #43b581;
+  --opz-warning: #faa61a;
+
+  /*
+   * Internal palette - 以下变量供 theme.css 内部使用
+   * 请勿直接在组件中使用，使用 theme.css 中的语义变量
+   */
+  --opz-white: #ffffff;
+  --opz-white-soft: #f8f8f8;
+  --opz-white-mute: #f2f2f2;
+  --opz-black: #1c1c1e;
+  --opz-black-soft: #2c2c2e;
+  --opz-black-mute: #3a3a3c;
+  --opz-indigo: #2c3e50;
+
+  --opz-divider-light-1: rgba(60, 60, 60, 0.29);
+  --opz-divider-light-2: rgba(60, 60, 60, 0.12);
+  --opz-divider-dark-1: rgba(84, 84, 84, 0.65);
+  --opz-divider-dark-2: rgba(84, 84, 84, 0.48);
+
+  --opz-text-light-1: var(--opz-indigo);
+  --opz-text-light-2: rgba(60, 60, 60, 0.66);
+  --opz-text-dark-1: var(--opz-white);
+  --opz-text-dark-2: rgba(235, 235, 235, 0.64);
+}

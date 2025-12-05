@@ -1,0 +1,54 @@
+name: Backend Code Quality Check
+
+on:
+  pull_request:
+    paths:
+      - 'apps/backend/**'
+      - 'packages/shared/**'
+      - 'pnpm-lock.yaml'
+  push:
+    branches:
+      - main
+
+jobs:
+  code-quality:
+    name: TypeScript & Linting
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - name: Setup pnpm cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build shared package
+        run: pnpm --filter @opz-hub/shared build
+
+      - name: Run TypeScript type check
+        run: pnpm typecheck
+
+      - name: Run linter
+        run: pnpm lint

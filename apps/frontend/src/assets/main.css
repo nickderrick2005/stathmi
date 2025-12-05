@@ -1,0 +1,24 @@
+/**
+ * 星图ΣΤΑΘΜΗ - Main Stylesheet
+ * 按顺序导入所有样式
+ */
+
+@import './variables.css';
+@import './theme.css';
+@import './base.css';
+
+body {
+  margin: 0;
+}
+
+#app {
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* 高分辨率屏幕阶梯式缩放 */
+@media (min-width: 1920px) {
+  #app {
+    zoom: 1.1;
+  }
+}

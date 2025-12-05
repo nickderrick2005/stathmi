@@ -1,0 +1,50 @@
+{
+  "name": "@opz-hub/backend",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "main": "dist/server.js",
+  "module": "dist/server.js",
+  "types": "dist/server.d.ts",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "sync": "MEILI_SEED_ON_START=true tsx src/scripts/start-syncer.ts",
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc --noEmit",
+    "start": "node dist/server.js",
+    "migrate:latest": "tsx scripts/migrate-latest.ts",
+    "migrate:down": "tsx scripts/migrate-rollback.ts",
+    "migrate:status": "tsx scripts/migrate-status.ts",
+    "migrate:check": "tsx scripts/migrate-check.ts",
+    "migrate:attachments": "tsx scripts/migrate-attachment-urls.ts",
+    "migrate:tag-follows": "tsx scripts/migrate-tag-follows.ts",
+    "db:generate": "tsx scripts/generate-types.ts",
+    "db:generate:check": "tsx scripts/generate-types.ts && git diff --exit-code src/types/database.ts"
+  },
+  "dependencies": {
+    "@fastify/cookie": "^11.0.2",
+    "@fastify/cors": "^11.1.0",
+    "@fastify/oauth2": "^8.1.2",
+    "@fastify/session": "^11.1.1",
+    "@opz-hub/shared": "workspace:*",
+    "dotenv": "^17.2.3",
+    "fastify": "^5.6.2",
+    "fastify-plugin": "^5.1.0",
+    "ioredis": "^5.8.2",
+    "kysely": "^0.28.8",
+    "meilisearch": "^0.54.0",
+    "node-cron": "^4.2.1",
+    "nodejieba": "^3.5.2",
+    "pg": "^8.13.1",
+    "pino": "^10.1.0",
+    "pino-pretty": "^13.1.2"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "@types/node-cron": "^3.0.11",
+    "@types/pg": "^8.11.10",
+    "kysely-codegen": "^0.19.0",
+    "tsx": "^4.15.0",
+    "typescript": "^5.6.3"
+  }
+}

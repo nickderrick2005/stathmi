@@ -1,0 +1,34 @@
+import type { FastifyInstance } from 'fastify';
+import { authRoutes } from './auth.js';
+import { favoriteRoutes } from './favorites.js';
+import { followRoutes } from './follows.js';
+import { notificationRoutes } from './notifications.js';
+import { postsRoutes } from './posts.js';
+import { searchRoutes } from './search.js';
+import { onboardingRoutes } from './onboarding.js';
+import { userSettingsRoutes } from './userSettings.js';
+import { usersRoutes } from './users.js';
+import { channelsRoutes } from './channels.js';
+import { rolesRoutes } from './roles.js';
+import { tagsRoutes } from './tags.js';
+import { meRoutes } from './me.js';
+import { lookupRoutes } from './lookup.js';
+import { noticesRoutes } from './notices.js';
+
+export const registerApiRoutes = async (app: FastifyInstance) => {
+  await app.register(authRoutes, { prefix: '/auth' });
+  await app.register(postsRoutes, { prefix: '/posts' });
+  await app.register(meRoutes, { prefix: '/me' });
+  await app.register(channelsRoutes, { prefix: '/channels' });
+  await app.register(rolesRoutes, { prefix: '/roles' });
+  await app.register(favoriteRoutes, { prefix: '/favorites' });
+  await app.register(followRoutes, { prefix: '/follows' });
+  await app.register(notificationRoutes, { prefix: '/notifications' });
+  await app.register(userSettingsRoutes, { prefix: '/user' });
+  await app.register(usersRoutes, { prefix: '/users' });
+  await app.register(searchRoutes);
+  await app.register(onboardingRoutes, { prefix: '/onboarding' });
+  await app.register(tagsRoutes, { prefix: '/tags' });
+  await app.register(lookupRoutes, { prefix: '/lookup' });
+  await app.register(noticesRoutes);
+};

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+  <!-- 左耳 -->
+  <path d="M3 4 L5 10 L8 6 Z" fill="currentColor" opacity="0.3" />
+  <!-- 右耳 -->
+  <path d="M21 4 L19 10 L16 6 Z" fill="currentColor" opacity="0.3" />
+  <!-- 脸 -->
+  <ellipse cx="12" cy="14" rx="9" ry="8" fill="currentColor" opacity="0.15" />
+  <!-- 左眼 -->
+  <ellipse cx="8.5" cy="13" rx="1.5" ry="2" fill="currentColor" />
+  <!-- 右眼 -->
+  <ellipse cx="15.5" cy="13" rx="1.5" ry="2" fill="currentColor" />
+  <!-- 鼻子 -->
+  <path d="M12 16 L10.8 17.8 L13.2 17.8 Z" fill="currentColor" opacity="0.6" />
+  <!-- 嘴 -->
+  <path d="M9.5 19 Q12 20.5 14.5 19" stroke="currentColor" stroke-width="0.8" fill="none" opacity="0.4" />
+  <!-- 胡须 -->
+  <line x1="3" y1="15" x2="7" y2="16" stroke="currentColor" stroke-width="0.6" opacity="0.35" />
+  <line x1="3" y1="17.5" x2="7" y2="17.5" stroke="currentColor" stroke-width="0.6" opacity="0.35" />
+  <line x1="21" y1="15" x2="17" y2="16" stroke="currentColor" stroke-width="0.6" opacity="0.35" />
+  <line x1="21" y1="17.5" x2="17" y2="17.5" stroke="currentColor" stroke-width="0.6" opacity="0.35" />
+</svg>

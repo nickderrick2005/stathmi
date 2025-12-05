@@ -1,0 +1,53 @@
+/**
+ * 星图ΣΤΑΘΜΗ - Base Styles
+ * CSS Reset 与全局基础样式
+ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  min-height: 100vh;
+  font-family: var(--opz-font-family);
+  font-size: var(--opz-font-size-base);
+  line-height: var(--opz-line-height);
+  color: var(--opz-text-primary);
+  background: var(--opz-bg-base);
+  transition:
+    color var(--opz-transition-slow),
+    background-color var(--opz-transition-slow);
+  /* 阻止浏览器默认下拉刷新，使用自定义下拉刷新 */
+  overscroll-behavior-y: contain;
+}
+
+a {
+  color: var(--opz-primary);
+  text-decoration: none;
+  transition: color var(--opz-transition-fast);
+}
+
+a:hover {
+  color: var(--opz-accent);
+}
+
+button {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}

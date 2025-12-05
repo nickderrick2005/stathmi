@@ -1,0 +1,11 @@
+<svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <!-- 倾斜图钉：类似 📌 emoji -->
+  <g transform="rotate(-45 8 8)">
+    <!-- 钉头（圆形） -->
+    <circle cx="8" cy="4" r="3"/>
+    <!-- 钉身 -->
+    <rect x="7" y="6" width="2" height="6" rx="0.5"/>
+    <!-- 钉尖 -->
+    <path d="M7 12L8 15L9 12"/>
+  </g>
+</svg>
