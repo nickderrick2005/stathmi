@@ -9,7 +9,6 @@ export interface RequestContext {
     nickname?: string;
     globalName?: string;
     avatar: string | null;
-    email?: string;
     roles: string[];
     isAdmin: boolean;
     lastLogin: string;
@@ -49,7 +48,6 @@ export const createRequestContext = (request: FastifyRequest): RequestContext =>
       nickname: user.nickname,
       globalName: user.globalName,
       avatar: user.avatar ?? null,
-      email: user.email ?? undefined,
       roles: user.roles,
       isAdmin: user.isAdmin,
       lastLogin: user.lastLogin ?? new Date().toISOString(),

@@ -12,7 +12,6 @@ export interface SessionData extends fastifySession.FastifySessionObject {
     roles: string[];
     isAdmin: boolean;
     lastLogin?: string;
-    email?: string;
     discordRoles?: string[];
     orientations?: string[];
   };

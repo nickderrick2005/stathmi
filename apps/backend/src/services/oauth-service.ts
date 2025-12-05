@@ -37,7 +37,7 @@ export class OAuthService {
   ) {}
 
   async handleDiscordUser(discordUser: DiscordOAuthUser, options: HandleDiscordUserOptions = {}): Promise<SessionUser> {
-    const { id: discordId, username, email } = discordUser;
+    const { id: discordId, username } = discordUser;
     const normalizedGuildRoles = (options.guildRoles ?? []).map((role) => role.trim()).filter(Boolean);
 
     try {
@@ -76,7 +76,6 @@ export class OAuthService {
         nickname: upsertedUser.nickname,
         globalName: upsertedUser.globalName,
         avatar: upsertedUser.avatar,
-        email: email ?? undefined,
         roles: Array.from(sessionRoles),
         isAdmin: upsertedUser.isAdmin,
         lastLogin: new Date().toISOString(),

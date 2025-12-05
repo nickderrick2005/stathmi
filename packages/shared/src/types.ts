@@ -27,7 +27,6 @@ export interface SessionUser {
   nickname?: string; // Discord 服务器昵称
   globalName?: string; // Discord 全局显示名
   avatar: string | null;
-  email?: string;
   roles: string[];
   isAdmin: boolean;
   lastLogin: string;
