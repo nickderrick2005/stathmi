@@ -66,6 +66,7 @@ function handleIncludeInvalidChange(value: boolean) {
       <FeedFilters
         :selected-channels="trendingChannels"
         :include-invalid="trendingIncludeInvalid"
+        :loading="loading"
         default-mode="followed"
         @update:selected-channels="handleChannelsChange"
         @update:include-invalid="handleIncludeInvalidChange"

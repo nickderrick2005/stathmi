@@ -118,6 +118,7 @@ async function handleNewContentPassed() {
       <FeedFilters
         :selected-channels="followingChannels"
         :include-invalid="followingIncludeInvalid"
+        :loading="loading"
         default-mode="all"
         @update:selected-channels="handleChannelsChange"
         @update:include-invalid="handleIncludeInvalidChange"

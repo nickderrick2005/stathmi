@@ -548,11 +548,19 @@ export class MeilisearchPostsSearchRepository implements PostsSearchRepository {
     return this.executeSearch('', filters, { sort: sortRules, limit, offset });
   }
 
-  async listNewHot(limit: number, offset: number, includeInvalid = false, sort?: SortOption): Promise<PaginatedPosts> {
+  async listNewHot(limit: number, offset: number, includeInvalid = false, sort?: SortOption, channelIds?: string[]): Promise<PaginatedPosts> {
     const filters = this.buildBaseFilters(includeInvalid);
     const sevenDaysAgoTs = Date.now() - 7 * 24 * 60 * 60 * 1000;
     filters.push(`createdAt >= ${sevenDaysAgoTs}`);
     filters.push('(reactionCount > 10 OR messageCount > 5)');
+
+    // 频道筛选
+    if (channelIds?.length) {
+      const channelExpr = this.buildInExpression('categoryId', channelIds);
+      if (channelExpr) {
+        filters.push(channelExpr);
+      }
+    }
 
     // 检查是否使用智能排序
     if (sort?.field === 'weighted') {
@@ -567,13 +575,22 @@ export class MeilisearchPostsSearchRepository implements PostsSearchRepository {
     limit: number,
     offset: number,
     includeInvalid = false,
-    sort?: SortOption
+    sort?: SortOption,
+    channelIds?: string[]
   ): Promise<PaginatedPosts> {
     const filters = this.buildBaseFilters(includeInvalid);
     const thirtyDaysAgoTs = Date.now() - 30 * 24 * 60 * 60 * 1000;
     const recentSevenDaysTs = Date.now() - 7 * 24 * 60 * 60 * 1000;
     filters.push(`createdAt < ${thirtyDaysAgoTs}`);
     filters.push(`lastActiveAt >= ${recentSevenDaysTs}`);
+
+    // 频道筛选
+    if (channelIds?.length) {
+      const channelExpr = this.buildInExpression('categoryId', channelIds);
+      if (channelExpr) {
+        filters.push(channelExpr);
+      }
+    }
 
     // 检查是否使用智能排序
     if (sort?.field === 'weighted') {

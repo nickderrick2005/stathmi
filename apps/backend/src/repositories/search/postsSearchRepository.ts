@@ -20,7 +20,8 @@ export interface PostsSearchRepository {
     offset: number,
     sortByUpdated?: boolean,
     includeInvalid?: boolean,
-    sort?: SortOption
+    sort?: SortOption,
+    channelIds?: string[]
   ): Promise<PaginatedPosts>;
   listByChannel(channelId: string, limit: number, offset: number, includeInvalid?: boolean): Promise<PaginatedPosts>;
   listByTag(tagName: string, limit: number, offset: number, includeInvalid?: boolean): Promise<PaginatedPosts>;
@@ -30,7 +31,8 @@ export interface PostsSearchRepository {
     offset: number,
     sortByUpdated?: boolean,
     includeInvalid?: boolean,
-    sort?: SortOption
+    sort?: SortOption,
+    channelIds?: string[]
   ): Promise<PaginatedPosts>;
   listByAuthorsOrTags(
     authorIds: string[],
@@ -39,7 +41,8 @@ export interface PostsSearchRepository {
     offset: number,
     sortByUpdated?: boolean,
     includeInvalid?: boolean,
-    sort?: SortOption
+    sort?: SortOption,
+    channelIds?: string[]
   ): Promise<PaginatedPosts>;
   listByIds(ids: string[], limit: number, offset: number, includeInvalid?: boolean): Promise<PaginatedPosts>;
   search(params: SearchQueryParams, includeInvalid?: boolean): Promise<PaginatedPosts>;
@@ -56,6 +59,6 @@ export interface PostsSearchRepository {
     includeInvalid?: boolean,
     sort?: SortOption
   ): Promise<PaginatedPosts>;
-  listNewHot(limit: number, offset: number, includeInvalid?: boolean, sort?: SortOption): Promise<PaginatedPosts>;
-  listHiddenGems(limit: number, offset: number, includeInvalid?: boolean, sort?: SortOption): Promise<PaginatedPosts>;
+  listNewHot(limit: number, offset: number, includeInvalid?: boolean, sort?: SortOption, channelIds?: string[]): Promise<PaginatedPosts>;
+  listHiddenGems(limit: number, offset: number, includeInvalid?: boolean, sort?: SortOption, channelIds?: string[]): Promise<PaginatedPosts>;
 }

@@ -111,21 +111,22 @@ export const postsRoutes: FastifyPluginCallback = (app, _opts, done) => {
         }
       | undefined;
 
-    if (ctx) {
+    // 显式传入频道筛选时，只按频道筛选（不混合 tags，避免 OR 逻辑干扰）
+    const hasExplicitChannelFilter = channelIdsFromQuery.length > 0;
+
+    if (hasExplicitChannelFilter) {
+      // 用户显式选择了频道，只按频道筛选
+      preferences = {
+        channelIds: Array.from(new Set(channelIdsFromQuery)),
+      };
+    } else if (ctx) {
+      // 未显式选择频道，使用用户偏好（关注的频道 + 标签）
       const followedTags = await tagFollowsService.listFollowedTagNames(ctx.userId);
-      const channelIds =
-        channelIdsFromQuery.length > 0
-          ? channelIdsFromQuery
-          : await channelFollowsService.listFollowedChannelIds(ctx.userId);
+      const channelIds = await channelFollowsService.listFollowedChannelIds(ctx.userId);
       preferences = {
         tags: followedTags,
         channelIds: Array.from(new Set(channelIds)),
         orientations: ctx.session.orientations ?? [],
-      };
-    } else if (channelIdsFromQuery.length > 0) {
-      // 未登录但显式传入频道筛选时也允许
-      preferences = {
-        channelIds: Array.from(new Set(channelIdsFromQuery)),
       };
     }
 
@@ -151,7 +152,8 @@ export const postsRoutes: FastifyPluginCallback = (app, _opts, done) => {
     const query = request.query as Record<string, unknown>;
     const { limit, offset, includeInvalid } = parsePagination(query);
     const sort = parseSort(query);
-    const result = await feedsService.listTrendingNewHot(limit, offset, includeInvalid, sort);
+    const channelIds = toStringArray(query?.channels);
+    const result = await feedsService.listTrendingNewHot(limit, offset, includeInvalid, sort, channelIds.length > 0 ? channelIds : undefined);
     result.posts = await feedsService.markUserParticipation(result.posts, request.ctx?.userId);
     return reply.send(result);
   });
@@ -160,7 +162,8 @@ export const postsRoutes: FastifyPluginCallback = (app, _opts, done) => {
     const query = request.query as Record<string, unknown>;
     const { limit, offset, includeInvalid } = parsePagination(query);
     const sort = parseSort(query);
-    const result = await feedsService.listTrendingHiddenGems(limit, offset, includeInvalid, sort);
+    const channelIds = toStringArray(query?.channels);
+    const result = await feedsService.listTrendingHiddenGems(limit, offset, includeInvalid, sort, channelIds.length > 0 ? channelIds : undefined);
     result.posts = await feedsService.markUserParticipation(result.posts, request.ctx?.userId);
     return reply.send(result);
   });

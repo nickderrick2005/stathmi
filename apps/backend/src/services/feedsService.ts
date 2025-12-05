@@ -206,9 +206,10 @@ export class FeedsService {
     limit: number,
     offset: number,
     includeInvalid: boolean,
-    sort: SortOption | undefined
+    sort: SortOption | undefined,
+    channelIds?: string[]
   ): Promise<PaginatedPosts> {
-    const result = await this.postsSearchRepository.listNewHot(limit, offset, includeInvalid, sort);
+    const result = await this.postsSearchRepository.listNewHot(limit, offset, includeInvalid, sort, channelIds);
     return this.sortResult(result, sort);
   }
 
@@ -216,9 +217,10 @@ export class FeedsService {
     limit: number,
     offset: number,
     includeInvalid: boolean,
-    sort: SortOption | undefined
+    sort: SortOption | undefined,
+    channelIds?: string[]
   ): Promise<PaginatedPosts> {
-    const result = await this.postsSearchRepository.listHiddenGems(limit, offset, includeInvalid, sort);
+    const result = await this.postsSearchRepository.listHiddenGems(limit, offset, includeInvalid, sort, channelIds);
     return this.sortResult(result, sort);
   }
 }

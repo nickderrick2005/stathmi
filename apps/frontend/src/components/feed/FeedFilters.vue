@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, watch, onMounted } from 'vue';
-import { NPopover, NSwitch } from 'naive-ui';
+import { NPopover, NSwitch, NSpin } from 'naive-ui';
 import { useMetadataStore } from '@/stores/metadata';
 import { useFollowsStore } from '@/stores/follows';
 import type { Channel } from '@opz-hub/shared';
@@ -10,6 +10,8 @@ const props = defineProps<{
   includeInvalid: boolean;
   // 默认模式：'all' = 全部频道，'followed' = 已关注频道
   defaultMode?: 'all' | 'followed';
+  // 加载状态
+  loading?: boolean;
 }>();
 
 const emit = defineEmits<{
@@ -113,10 +115,11 @@ const hasActiveFilters = computed(() => {
   }
 });
 
-// 乐观更新：先更新本地状态，再 emit
+// 乐观更新：先更新本地状态，再 emit，然后关闭 popover
 function updateChannels(channels: string[]) {
   localChannels.value = channels;
   emit('update:selectedChannels', channels);
+  showPopover.value = false;
 }
 
 function handleChannelClick(channelId: string) {
@@ -154,8 +157,9 @@ function handleIncludeInvalidChange(value: boolean) {
 <template>
   <NPopover v-model:show="showPopover" trigger="click" placement="bottom-start" :show-arrow="false" raw>
     <template #trigger>
-      <button type="button" class="filter-btn" :class="{ active: hasActiveFilters }">
-        <svg class="filter-icon" viewBox="0 0 24 24" fill="currentColor">
+      <button type="button" class="filter-btn" :class="{ active: hasActiveFilters, loading: props.loading }">
+        <NSpin v-if="props.loading" :size="14" />
+        <svg v-else class="filter-icon" viewBox="0 0 24 24" fill="currentColor">
           <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
         </svg>
         <span class="filter-label">{{ filterLabel }}</span>
@@ -261,6 +265,10 @@ function handleIncludeInvalidChange(value: boolean) {
 
 .filter-btn.active .filter-icon {
   opacity: 1;
+}
+
+.filter-btn.loading {
+  pointer-events: none;
 }
 
 .filter-label {
