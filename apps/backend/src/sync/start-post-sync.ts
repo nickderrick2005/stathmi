@@ -45,8 +45,19 @@ export const startPostSync = async (db: Kysely<DB>, logger: Logger) => {
   });
 
   if (process.env.MEILI_SEED_ON_START === 'true') {
+    const autoFixContent = process.env.MEILI_AUTO_FIX_CONTENT === 'true';
     logger.info?.('[PostSync] Seeding Meilisearch index from Postgres...');
-    await engine.syncAllPosts();
+    if (autoFixContent) {
+      logger.info?.('[PostSync] Auto-fix content enabled, will fetch missing content from Discord');
+    }
+    await engine.syncAllPosts(200, {
+      autoFixContent,
+      onProgress: (current, total, fixed) => {
+        if (current % 1000 === 0 || current === total) {
+          logger.info?.(`[PostSync] Progress: ${current}/${total}${fixed > 0 ? `, fixed: ${fixed}` : ''}`);
+        }
+      },
+    });
     logger.info?.('[PostSync] Seed completed');
   }
 
